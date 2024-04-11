@@ -1,0 +1,19 @@
+#! /bin/sh
+
+app_id=$(dwl-state -pn)
+excludes=("'org.keepassxc.KeePassXC'")
+
+function check_excludes {
+    for exclude in "${excludes[@]}"; do
+        if [[ "$app_id" == "$exclude" ]]; then
+            return 1;
+        fi
+    done
+
+    return 0;
+}
+
+check_excludes
+if [[ "$?" == "0" ]]; then
+    clipman store --no-persist
+fi
