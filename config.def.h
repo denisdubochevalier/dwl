@@ -7,28 +7,42 @@
 static const int sloppyfocus               = 1;  /* focus follows mouse */
 static const int bypass_surface_visibility = 0;  /* 1 means idle inhibitors will disable idle tracking even if it's surface isn't visible  */
 static const unsigned int borderpx         = 1;  /* border pixel of windows */
-static const unsigned int gappx            = 7;  /* gap between windows */
-static const float rootcolor[]             = COLOR(0x000000ff);
-static const float bordercolor[]           = COLOR(0x444444ff);
-static const float focuscolor[]            = COLOR(0x005577ff);
-static const float urgentcolor[]           = COLOR(0xff0000ff);
+static const unsigned int gappx            = 8;  /* gap between windows */
+static const float rootcolor[]             = COLOR(0x475437ff);
+static const float bordercolor[]           = COLOR(0x1e8b50d9);
+static const float focuscolor[]            = COLOR(0x90ceaaff);
+static const float urgentcolor[]           = COLOR(0xecd3a0ff);
 /* This conforms to the xdg-protocol. Set the alpha to zero to restore the old behavior */
 static const float fullscreen_bg[]         = {0.1f, 0.1f, 0.1f, 1.0f}; /* You can also use glsl colors */
 
 /* bar */
 static const int showbar        = 1; /* 0 means no bar */
 static const int topbar         = 1; /* 0 means bottom bar */
-static const char *fonts[]      = {"monospace:size=10"};
+static const char *fonts[]      = { "CaskaydiaCove Nerd Font Mono:size=12", "monospace:size=12" };
 static const char *fontattrs    = "dpi=96";
-static pixman_color_t normbarfg = { 0xbbbb, 0xbbbb, 0xbbbb, 0xffff };
-static pixman_color_t normbarbg = { 0x2222, 0x2222, 0x2222, 0xffff };
-static pixman_color_t selbarfg  = { 0xeeee, 0xeeee, 0xeeee, 0xffff };
-static pixman_color_t selbarbg  = { 0x0000, 0x5555, 0x7777, 0xffff };
+static pixman_color_t selbarfg = { 0xc2c2, 0xd8d8, 0x9c9c, 0xffff};
+static pixman_color_t selbarbg = { 0x4747, 0x5454, 0x3737, 0xffff};
+static pixman_color_t normbarfg = { 0xc2c2, 0xd8d8, 0x9c9c, 0xffff};
+static pixman_color_t normbarbg = { 0x6666, 0x8f8f, 0x3131, 0xffff};
 
 /* Autostart */
 static const char *const autostart[] = {
-        "wbg", "/path/to/your/image", NULL,
-        NULL /* terminate */
+	"resetxdgportal.sh", NULL,
+	"dbus-update-activation-environment", "--systemd", "WAYLAND_DISPLAY", 	 "XDG_CURRENT_DESKTOP", 											 NULL, /* for XDPH */
+	"dbus-update-activation-environment", "--systemd", "--all", 						 																							 NULL, /* for XDPH */
+	"systemctl", 												  "--user",    "import-environment", "WAYLAND_DISPLAY", 		"XDG_CURRENT_DESKTOP", NULL, /* for XDPH */
+	"polkitkdeauth.sh",  NULL, /* authentication dialogue for GUI apps */
+	"dunst",             NULL, /* start notification demon */
+	"wl-paste", "--type", "text",  "--watch", "cliphist", "store", NULL, /* clipboard store text data */
+	"wl-paste", "--type", "image", "--watch", "cliphist", "store", NULL, /* clipboard store image data */
+	"swaybg", "-i", "/home/denis/Pictures/cosmonaut.png", NULL, /* start wallpaper daemon */
+	"foot", "--server",  NULL, /* start terminal daemon */
+	"gsettings", "set", "org.gnome.desktop.interface", "icon-theme",   "'Gruvbox-Plus-Dark'", NULL,
+	"gsettings", "set", "org.gnome.desktop.interface", "gtk-theme",    "'Gruvbox-Retro'",     NULL,
+	"gsettings", "set", "org.gnome.desktop.interface", "color-scheme", "'prefer-dark'",       NULL,
+	"gsettings", "set", "org.gnome.desktop.interface", "cursor-theme", "'Gruvbox-Retro'",     NULL,
+	"gsettings", "set", "org.gnome.desktop.interface", "cursor-size",  "20",                  NULL,
+	NULL, /* terminate */
 };
 
 /* tagging - TAGCOUNT must be no greater than 31 */
@@ -39,19 +53,18 @@ static int log_level = WLR_ERROR;
 
 static const Rule rules[] = {
 	/* app_id             title       tags mask     isfloating   monitor */
-	/* examples: */
-	{ "Gimp_EXAMPLE",     NULL,       0,            1,           -1 }, /* Start on currently visible tags floating, not tiled */
-	{ "firefox_EXAMPLE",  NULL,       1 << 8,       0,           -1 }, /* Start on ONLY tag "9" */
+	{ "Gimp",     NULL,       0,            1,           -1 }, /* Start on currently visible tags floating, not tiled */
+	/* { "firefox_EXAMPLE",  NULL,       1 << 8,       0,           -1 }, */
 };
 
 /* layout(s) */
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "[]=",      tile },
+	{ "[\\]",     dwindle },
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
 	{ "[@]",      spiral },
-	{ "[\\]",     dwindle },
+	{ "[]=",      tile },
 };
 
 /* monitors */
@@ -71,6 +84,7 @@ static const struct xkb_rule_names xkb_rules = {
 	/* example:
 	.options = "ctrl:nocaps",
 	*/
+	.variant = "intl",
 	.options = NULL,
 };
 
@@ -121,7 +135,7 @@ LIBINPUT_CONFIG_TAP_MAP_LMR -- 1/2/3 finger tap maps to left/middle/right
 static const enum libinput_config_tap_button_map button_map = LIBINPUT_CONFIG_TAP_MAP_LRM;
 
 /* If you want to use the windows key for MODKEY, use WLR_MODIFIER_LOGO */
-#define MODKEY WLR_MODIFIER_ALT
+#define MODKEY WLR_MODIFIER_LOGO
 
 #define TAGKEYS(KEY,SKEY,TAG) \
 	{ MODKEY,                    KEY,            view,            {.ui = 1 << TAG} }, \
@@ -133,40 +147,61 @@ static const enum libinput_config_tap_button_map button_map = LIBINPUT_CONFIG_TA
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static const char *termcmd[] = { "foot", NULL };
-static const char *menucmd[] = { "bemenu-run", NULL };
+static const char *termcmd[] = { "footclient", NULL };
+static const char *menucmd[] = { "wofi", "--show", "drun", NULL };
+static const char *ytfzfcmd[] = { "ytfzf", "-D", NULL };
+static const char *swaylockcmd[] = { "swaylock", NULL };
+static const char *editnotescmd[] = { "/home/denis/.local/bin/editnotes.sh", NULL };
+static const char *screenshotcmd[] = { "grimblast", "copysave", "area", NULL };
+static const char *logoutcmd[] = { "wlogout", NULL };
+static const char *firefoxcmd[] = { "firefox", NULL };
+static const char *qutebrowsercmd[] = { "qutebrowser", NULL };
+static const char *mutecmd[] = { "/home/denis/.config/hyprdots/scripts/volumecontrol.sh", "-o", "m", NULL };
+static const char *lowervolumecmd[] = { "/home/denis/.config/hyprdots/scripts/volumecontrol.sh", "-o", "d", NULL };
+static const char *raisevolumecmd[] = { "/home/denis/.config/hyprdots/scripts/volumecontrol.sh", "-o", "i", NULL };
 
 static const Key keys[] = {
 	/* Note that Shift changes certain key codes: c -> C, 2 -> at, etc. */
 	/* modifier                  key                 function        argument */
 	{ MODKEY,                    XKB_KEY_p,          spawn,          {.v = menucmd} },
-	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_Return,     spawn,          {.v = termcmd} },
-	{ MODKEY,                    XKB_KEY_b,          togglebar,      {0} },
+	{ MODKEY,                    XKB_KEY_Return,     spawn,          {.v = termcmd} },
+	{ MODKEY|WLR_MODIFIER_CTRL,  XKB_KEY_b,          togglebar,      {0} },
 	{ MODKEY,                    XKB_KEY_j,          focusstack,     {.i = +1} },
 	{ MODKEY,                    XKB_KEY_k,          focusstack,     {.i = -1} },
 	{ MODKEY,                    XKB_KEY_i,          incnmaster,     {.i = +1} },
 	{ MODKEY,                    XKB_KEY_d,          incnmaster,     {.i = -1} },
 	{ MODKEY,                    XKB_KEY_h,          setmfact,       {.f = -0.05f} },
 	{ MODKEY,                    XKB_KEY_l,          setmfact,       {.f = +0.05f} },
-	{ MODKEY|WLR_MODIFIER_LOGO,  XKB_KEY_h,          incgaps,       {.i = +1 } },
-	{ MODKEY|WLR_MODIFIER_LOGO,  XKB_KEY_l,          incgaps,       {.i = -1 } },
-	{ MODKEY|WLR_MODIFIER_LOGO,  XKB_KEY_0,          togglegaps,     {0} },
-	{ MODKEY|WLR_MODIFIER_LOGO|WLR_MODIFIER_SHIFT,   XKB_KEY_parenright,defaultgaps,    {0} },
-	{ MODKEY,                    XKB_KEY_Return,     zoom,           {0} },
+	{ MODKEY|WLR_MODIFIER_ALT,   XKB_KEY_h,          incgaps,        {.i = +1} },
+	{ MODKEY|WLR_MODIFIER_ALT,   XKB_KEY_l,          incgaps,        {.i = -1} },
+	{ MODKEY|WLR_MODIFIER_ALT,   XKB_KEY_0,          togglegaps,     {0} },
+	{ MODKEY|WLR_MODIFIER_ALT|WLR_MODIFIER_SHIFT,    XKB_KEY_parenright,defaultgaps, {0} },
+	{ MODKEY|WLR_MODIFIER_CTRL,  XKB_KEY_Return,     zoom,           {0} },
 	{ MODKEY,                    XKB_KEY_Tab,        view,           {0} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_C,          killclient,     {0} },
+	{ MODKEY,                    XKB_KEY_b,          togglebar,      {0} },
 	{ MODKEY,                    XKB_KEY_t,          setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                    XKB_KEY_f,          setlayout,      {.v = &layouts[1]} },
+	{ MODKEY,                    XKB_KEY_f,          setlayout,      {.v = &layouts[4]} },
 	{ MODKEY,                    XKB_KEY_m,          setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,                    XKB_KEY_space,      setlayout,      {0} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_space,      togglefloating, {0} },
-	{ MODKEY,                    XKB_KEY_e,         togglefullscreen, {0} },
+	{ MODKEY,                    XKB_KEY_e,          togglefullscreen, {0} },
 	{ MODKEY,                    XKB_KEY_0,          view,           {.ui = ~0} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_parenright, tag,            {.ui = ~0} },
 	{ MODKEY,                    XKB_KEY_comma,      focusmon,       {.i = WLR_DIRECTION_LEFT} },
 	{ MODKEY,                    XKB_KEY_period,     focusmon,       {.i = WLR_DIRECTION_RIGHT} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_less,       tagmon,         {.i = WLR_DIRECTION_LEFT} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_greater,    tagmon,         {.i = WLR_DIRECTION_RIGHT} },
+	{ MODKEY,                    XKB_KEY_y,          spawn,          {.v = ytfzfcmd} },
+	{ MODKEY|WLR_MODIFIER_CTRL,  XKB_KEY_l,          spawn,          {.v = swaylockcmd} },
+	{ MODKEY,                    XKB_KEY_n,          spawn,          {.v = editnotescmd} },
+	{ MODKEY,                    XKB_KEY_s,          spawn,          {.v = screenshotcmd} },
+	{ MODKEY,                    XKB_KEY_b,          spawn,          {.v = firefoxcmd} },
+	{ MODKEY,                    XKB_KEY_q,          spawn,          {.v = qutebrowsercmd} },
+	{ MODKEY,                    XKB_KEY_BackSpace,  spawn,          {.v = logoutcmd} },
+	{ 0,                         XKB_KEY_XF86AudioMute, spawn,       {.v = mutecmd} },
+	{ 0,                         XKB_KEY_XF86AudioLowerVolume, spawn,{.v = lowervolumecmd} },
+	{ 0,                         XKB_KEY_XF86AudioRaiseVolume, spawn,{.v = raisevolumecmd} },
 	TAGKEYS(          XKB_KEY_1, XKB_KEY_exclam,                     0),
 	TAGKEYS(          XKB_KEY_2, XKB_KEY_at,                         1),
 	TAGKEYS(          XKB_KEY_3, XKB_KEY_numbersign,                 2),
