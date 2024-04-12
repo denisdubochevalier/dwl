@@ -118,6 +118,7 @@ static const Rule rules[] = {
     /* app_id             title       tags mask     isfloating   monitor */
     {"Gimp", NULL, 0, 1,
      -1}, /* Start on currently visible tags floating, not tiled */
+    {"ScummVM", NULL, 0, 1, -1}
     /* { "firefox_EXAMPLE",  NULL,       1 << 8,       0,           -1 }, */
 };
 
