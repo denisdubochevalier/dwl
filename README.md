@@ -70,6 +70,28 @@ loads are scripts on my local folder).
 I strongly suggest that you fork upstream and pick the patches that interest you
 instead of using this repo.
 
+### Additional dependencies
+
+The following dependencies are used for keybindings and autostart:
+
+- [foot](https://codeberg.org/dnkl/foot): Terminal emulator
+- [wofi](https://hg.sr.ht/~scoopta/wofi): Dmenu replacement for wayland
+- [ytfzf-wofi](https://github.com/denisdubochevalier/ytfzf-wofi): Fork of ytfzf to watch youtube with wofi
+- [swaylock](https://github.com/swaywm/swaylock): Screen locker
+- [notes-sh](https://github.com/denisdubochevalier/notes-sh): Script to navigate markdown notes with wofi
+- [grimblast](https://github.com/hyprwm/contrib): Screenshot tool
+- [wlogout](https://github.com/ArtsyMacaw/wlogout): Logout menu for wayland environments
+- [qutebrowser](https://github.com/qutebrowser/qutebrowser): Vim-like browser
+- [volumecontrol](https://github.com/denisdubochevalier/volumecontrol): Script to control devices volume
+- [resetxdgportal](https://github.com/denisdubochevalier/resetxdgportal): Script to reset XDG portals on startup
+- [dbus](https://wiki.freedesktop.org/www/Software/dbus/): D-Bus message bus
+- [systemd](https://systemd.io/): Used for environment importing
+- [polkitkdeauth](https://github.com/denisdubochevalier/polkitkdeauth): Script to authenticate using polkit-kde
+- [dunst](https://github.com/dunst-project/dunst): Notification daemon
+- [wl-clipboard](https://github.com/bugaevc/wl-clipboard): Clipboard utilities
+- [swaybg](https://github.com/swaywm/swaybg): Wallpaper utility
+- [glib2](https://docs.gtk.org/glib/): For the gsettings utility to set GTK theme
+
 ## Building dwl
 
 dwl has the following dependencies:

@@ -33,7 +33,7 @@ static pixman_color_t normbarbg = {0x6666, 0x8f8f, 0x3131, 0xffff};
 
 /* Autostart */
 static const char *const autostart[] = {
-    "resetxdgportal.sh",
+    "resetxdgportal",
     NULL,
     "dbus-update-activation-environment",
     "--systemd",
@@ -50,7 +50,7 @@ static const char *const autostart[] = {
     "WAYLAND_DISPLAY",
     "XDG_CURRENT_DESKTOP",
     NULL, /* for XDPH */
-    "polkitkdeauth.sh",
+    "polkitkdeauth",
     NULL, /* authentication dialogue for GUI apps */
     "dunst",
     NULL, /* start notification demon */
@@ -70,7 +70,7 @@ static const char *const autostart[] = {
     NULL, /* clipboard store image data */
     "swaybg",
     "-i",
-    "/home/denis/Pictures/cosmonaut.png",
+    "~/Pictures/wallpaper.png",
     NULL, /* start wallpaper daemon */
     "foot",
     "--server",
@@ -227,18 +227,13 @@ static const char *termcmd[] = {"footclient", NULL};
 static const char *menucmd[] = {"wofi", "--show", "drun", NULL};
 static const char *ytfzfcmd[] = {"ytfzf", "-D", NULL};
 static const char *swaylockcmd[] = {"swaylock", NULL};
-static const char *editnotescmd[] = {"/home/denis/.local/bin/editnotes.sh",
-                                     NULL};
+static const char *editnotescmd[] = {"editnotes", NULL};
 static const char *screenshotcmd[] = {"grimblast", "copysave", "area", NULL};
 static const char *logoutcmd[] = {"wlogout", NULL};
-static const char *firefoxcmd[] = {"firefox", NULL};
 static const char *qutebrowsercmd[] = {"qutebrowser", NULL};
-static const char *mutecmd[] = {
-    "/home/denis/.config/hyprdots/scripts/volumecontrol.sh", "-o", "m", NULL};
-static const char *lowervolumecmd[] = {
-    "/home/denis/.config/hyprdots/scripts/volumecontrol.sh", "-o", "d", NULL};
-static const char *raisevolumecmd[] = {
-    "/home/denis/.config/hyprdots/scripts/volumecontrol.sh", "-o", "i", NULL};
+static const char *mutecmd[] = {"volumecontrol", "-o", "m", NULL};
+static const char *lowervolumecmd[] = {"volumecontrol", "-o", "d", NULL};
+static const char *raisevolumecmd[] = {"volumecontrol", "-o", "i", NULL};
 
 static const Key keys[] = {
     /* Note that Shift changes certain key codes: c -> C, 2 -> at, etc. */
@@ -286,7 +281,6 @@ static const Key keys[] = {
     {MODKEY | WLR_MODIFIER_CTRL, XKB_KEY_l, spawn, {.v = swaylockcmd}},
     {MODKEY, XKB_KEY_n, spawn, {.v = editnotescmd}},
     {MODKEY | WLR_MODIFIER_CTRL, XKB_KEY_s, spawn, {.v = screenshotcmd}},
-    {MODKEY, XKB_KEY_b, spawn, {.v = firefoxcmd}},
     {MODKEY, XKB_KEY_q, spawn, {.v = qutebrowsercmd}},
     {MODKEY, XKB_KEY_BackSpace, spawn, {.v = logoutcmd}},
     {0, XKB_KEY_XF86AudioMute, spawn, {.v = mutecmd}},
