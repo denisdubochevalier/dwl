@@ -2816,6 +2816,7 @@ void snail(Monitor *m) {
                                           !c->isfullscreen) n++;
   if (n == 0)
     return;
+  // the previous checks prevents uninitialization of prev bellow
 
   if (n > m->nmaster)
     mw = m->nmaster ? ROUND(m->w.width * m->mfact) : 0;
