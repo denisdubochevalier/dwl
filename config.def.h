@@ -70,7 +70,7 @@ static const char *const autostart[] = {
     NULL, /* clipboard store image data */
     "swaybg",
     "-i",
-    "~/Pictures/wallpaper.png",
+    "/usr/local/share/wallpapers/wallpaper.png",
     NULL, /* start wallpaper daemon */
     "foot",
     "--server",
