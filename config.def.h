@@ -124,9 +124,9 @@ static const Rule rules[] = {
 /* layout(s) */
 static const Layout layouts[] = {
     /* symbol     arrange function */
-    {"[\\]", dwindle}, {"[]=", tile}, {"[M]", monocle},
+    {"[]=", tile},
+    {"[M]", monocle},
     {"><>", NULL}, /* no layout function means floating behavior */
-    {"[@]", spiral},
 };
 
 /* monitors */
@@ -262,9 +262,8 @@ static const Key keys[] = {
     {MODKEY | WLR_MODIFIER_SHIFT, XKB_KEY_C, killclient, {0}},
     {MODKEY, XKB_KEY_b, togglebar, {0}},
     {MODKEY, XKB_KEY_t, setlayout, {.v = &layouts[0]}},
-    {MODKEY, XKB_KEY_f, setlayout, {.v = &layouts[1]}},
-    {MODKEY, XKB_KEY_m, setlayout, {.v = &layouts[2]}},
-    {MODKEY, XKB_KEY_w, setlayout, {.v = &layouts[3]}},
+    {MODKEY, XKB_KEY_m, setlayout, {.v = &layouts[1]}},
+    {MODKEY, XKB_KEY_w, setlayout, {.v = &layouts[2]}},
     {MODKEY, XKB_KEY_space, setlayout, {0}},
     {MODKEY | WLR_MODIFIER_SHIFT, XKB_KEY_space, togglefloating, {0}},
     {MODKEY, XKB_KEY_e, togglefullscreen, {0}},
