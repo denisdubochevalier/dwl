@@ -1,6 +1,6 @@
 #!/bin/bash
 
 while true; do
-  date +"%F %H:%M:%S"
+  date +" %F %H:%M:%S "
   sleep 1s
 done | /usr/local/bin/dwl 
