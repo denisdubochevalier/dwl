@@ -53,6 +53,23 @@ Feature *non-goals* for the main codebase include:
   be done through the compositor
 - Animations and visual effects
 
+## About this fork
+
+A number of patches are applied here:
+
+- alwayscenter
+- autostart
+- bar
+- genericgaps
+- ipc-clipboard-patch
+- snail
+
+It is also configured to fit my system (which means that some of the commands it
+loads are scripts on my local folder).
+
+I strongly suggest that you fork upstream and pick the patches that interest you
+instead of using this repo.
+
 ## Building dwl
 
 dwl has the following dependencies:
