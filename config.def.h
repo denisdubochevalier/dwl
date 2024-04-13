@@ -10,7 +10,7 @@ static const int bypass_surface_visibility =
     0; /* 1 means idle inhibitors will disable idle tracking even if it's
           surface isn't visible  */
 static const unsigned int borderpx = 1; /* border pixel of windows */
-static const unsigned int gappx = 8;    /* gap between windows */
+static const unsigned int gappx = 16;   /* gap between windows */
 static const float rootcolor[] = COLOR(0x475437ff);
 static const float bordercolor[] = COLOR(0x475437ff);
 static const float focuscolor[] = COLOR(0x668f31ff);
