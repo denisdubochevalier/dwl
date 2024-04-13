@@ -12,8 +12,8 @@ static const int bypass_surface_visibility =
 static const unsigned int borderpx = 1; /* border pixel of windows */
 static const unsigned int gappx = 8;    /* gap between windows */
 static const float rootcolor[] = COLOR(0x475437ff);
-static const float bordercolor[] = COLOR(0x1e8b50d9);
-static const float focuscolor[] = COLOR(0x90ceaaff);
+static const float bordercolor[] = COLOR(0x475437ff);
+static const float focuscolor[] = COLOR(0x668f31ff);
 static const float urgentcolor[] = COLOR(0xecd3a0ff);
 /* This conforms to the xdg-protocol. Set the alpha to zero to restore the old
  * behavior */
