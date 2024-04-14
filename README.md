@@ -63,6 +63,7 @@ A number of patches are applied here:
 - genericgaps
 - ipc-clipboard-patch
 - snail
+- movestack
 
 It is also configured to fit my system (which means that some of the commands it
 loads are scripts on my local folder).
