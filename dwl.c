@@ -2577,6 +2577,8 @@ void setup(void) {
    * clients from the Unix socket, manging Wayland globals, and so on. */
   dpy = wl_display_create();
 
+  session = wlr_session_create(dpy);
+
   /* The backend is a wlroots feature which abstracts the underlying input and
    * output hardware. The autocreate option will choose the most suitable
    * backend based on the current environment, such as opening an X11 window
