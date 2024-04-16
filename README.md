@@ -64,6 +64,7 @@ A number of patches are applied here:
 - ipc-clipboard-patch
 - snail
 - movestack
+- pertag
 
 It is also configured to fit my system (which means that some of the commands it
 loads are scripts on my local folder).
