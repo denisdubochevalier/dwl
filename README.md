@@ -81,6 +81,7 @@ The following dependencies are used for keybindings and autostart:
 - [ytfzf-wofi](https://github.com/denisdubochevalier/ytfzf-wofi): Fork of ytfzf to watch youtube with wofi
 - [swaylock](https://github.com/swaywm/swaylock): Screen locker
 - [notes-sh](https://github.com/denisdubochevalier/notes-sh): Script to navigate markdown notes with wofi
+- [wradio](https://github.com/denisdubochevalier/wradio): Script to launch web radios
 - [grimblast](https://github.com/hyprwm/contrib): Screenshot tool
 - [wlogout](https://github.com/ArtsyMacaw/wlogout): Logout menu for wayland environments
 - [qutebrowser](https://github.com/qutebrowser/qutebrowser): Vim-like browser
