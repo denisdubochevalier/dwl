@@ -224,7 +224,7 @@ static const enum libinput_config_tap_button_map button_map =
 
 /* commands */
 static const char *termcmd[] = {"footclient", NULL};
-static const char *menucmd[] = {"wofi", "--show", "drun", "-p", "Exec", NULL};
+static const char *menucmd[] = {"wmenu_drun", NULL};
 static const char *ytfzfcmd[] = {"ytfzf", "-D", NULL};
 static const char *swaylockcmd[] = {"swaylock", NULL};
 static const char *editnotescmd[] = {"editnotes", NULL};
