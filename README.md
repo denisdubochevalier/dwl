@@ -83,7 +83,7 @@ The following dependencies are used for keybindings and autostart:
 - [swaylock](https://github.com/swaywm/swaylock): Screen locker
 - [notes-sh](https://github.com/denisdubochevalier/notes-sh): Script to navigate markdown notes with wmenu
 - [wradio](https://github.com/denisdubochevalier/wradio): Script to launch web radios
-- [grimblast](https://github.com/hyprwm/contrib): Screenshot tool
+- [grim](https://github.com/emersion/grim): Screenshot tool
 - [wlogout](https://github.com/ArtsyMacaw/wlogout): Logout menu for wayland environments
 - [qutebrowser](https://github.com/qutebrowser/qutebrowser): Vim-like browser
 - [volumecontrol](https://github.com/denisdubochevalier/volumecontrol): Script to control devices volume
