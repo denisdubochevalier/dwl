@@ -2,7 +2,7 @@
 
 while true; do
   cpu_usage=$(top -bn1 | awk '/Cpu/ { print $2}')
-  cpu_temp=$(sed 's/000$/°C/' /sys/class/thermal/thermal_zone1/temp)
+  cpu_temp=$(sensors k10temp-pci-00c3|grep Tctl|awk '{print $2}')
   disk=$(df -h | awk '{ if ($6 == "/home") print $4 }')
   memory=$(free -h | awk '(NR==2){ print $4 }')
   wifi=$(cat /sys/class/net/wlp4s0/operstate)
