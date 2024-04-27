@@ -11,9 +11,9 @@ static const int bypass_surface_visibility =
           surface isn't visible  */
 static const unsigned int borderpx = 1; /* border pixel of windows */
 static const unsigned int gappx = 16;   /* gap between windows */
-static const float rootcolor[] = COLOR(0x475437ff);
-static const float bordercolor[] = COLOR(0x475437ff);
-static const float focuscolor[] = COLOR(0x668f31ff);
+static const float rootcolor[] = COLOR(0xefefefff);
+static const float bordercolor[] = COLOR(0x252525ff);
+static const float focuscolor[] = COLOR(0x252525f31ff);
 static const float urgentcolor[] = COLOR(0xecd3a0ff);
 /* This conforms to the xdg-protocol. Set the alpha to zero to restore the old
  * behavior */
@@ -26,10 +26,10 @@ static const int topbar = 1;  /* 0 means bottom bar */
 static const char *fonts[] = {"CaskaydiaCove Nerd Font Mono:size=12",
                               "monospace:size=12"};
 static const char *fontattrs = "dpi=96";
-static pixman_color_t selbarfg = {0xc2c2, 0xd8d8, 0x9c9c, 0xffff};
-static pixman_color_t selbarbg = {0x4747, 0x5454, 0x3737, 0xffff};
-static pixman_color_t normbarfg = {0xc2c2, 0xd8d8, 0x9c9c, 0xffff};
-static pixman_color_t normbarbg = {0x6666, 0x8f8f, 0x3131, 0xffff};
+static pixman_color_t selbarfg = {0xefef, 0xefef, 0xefef, 0xffff};
+static pixman_color_t selbarbg = {0x2525, 0x2525, 0x2525, 0xffff};
+static pixman_color_t normbarfg = {0x2525, 0x2525, 0x2525, 0xffff};
+static pixman_color_t normbarbg = {0xefef, 0xefef, 0xefef, 0xffff};
 
 /* Autostart */
 static const char *const autostart[] = {
