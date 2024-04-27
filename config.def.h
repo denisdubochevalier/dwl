@@ -12,7 +12,7 @@ static const int bypass_surface_visibility =
 static const unsigned int borderpx = 1; /* border pixel of windows */
 static const unsigned int gappx = 16;   /* gap between windows */
 static const float rootcolor[] = COLOR(0xefefefff);
-static const float bordercolor[] = COLOR(0x252525ff);
+static const float bordercolor[] = COLOR(0x8a8a8aff);
 static const float focuscolor[] = COLOR(0x252525f31ff);
 static const float urgentcolor[] = COLOR(0xecd3a0ff);
 /* This conforms to the xdg-protocol. Set the alpha to zero to restore the old
@@ -79,25 +79,25 @@ static const char *const autostart[] = {
     "set",
     "org.gnome.desktop.interface",
     "icon-theme",
-    "'Gruvbox-Plus-Dark'",
+    "'Tela circle blue'",
     NULL,
     "gsettings",
     "set",
     "org.gnome.desktop.interface",
     "gtk-theme",
-    "'Gruvbox-Retro'",
+    "'Raleigh'",
     NULL,
     "gsettings",
     "set",
     "org.gnome.desktop.interface",
     "color-scheme",
-    "'prefer-dark'",
+    "'prefer-light'",
     NULL,
     "gsettings",
     "set",
     "org.gnome.desktop.interface",
     "cursor-theme",
-    "'Gruvbox-Retro'",
+    "'Bibata-Modern-Ice'",
     NULL,
     "gsettings",
     "set",
